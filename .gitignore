@@ -4,3 +4,6 @@
 *.jpg
 *.kmz
 *.tif
+*.csv
+*.xlsx
+.Rproj.user
