@@ -1,0 +1,32 @@
+DF_ID,Site,Runout_L,RF_angle,int_vol
+DR4,Dollar Ridge 4,,,1779.422
+DR5,Dollar Ridge 5,,,5010.218919
+DR2A,Dollar Ridge 2A,,,1128.265611
+DR1A,Dollar Ridge 1A,,,13846.1322
+S1,Seeley 1,,,1832.172693
+S1A,Seeley 1A,,,835.1389
+FC1,Fish Creek 1,49,86,2396.061639
+FC2,Fish Creek 2,,,2160
+FC3,Fish Creek 3,,,770.9323974
+FC4_11,Fish Creek 4 2011,,,1048.6
+FC5_11,Fish Creek 5 2011,,,3380.121117
+FC7_11,Fish Creek 7 2011,,,2133
+FC5_14,Fish Creek 5 2014,,,2684.841995
+FC5_18,Fish Creek 5 2018,,,3233.9
+FC4_18,Fish Creek 4 2018,,,779.7475
+FC7_18,Fish Creek 7 2018,,,2154.41
+SC1A,Shingle Creek 1A,,,4431.610127
+SC2_11,Shingle Creek 2 2011,,,222.67
+SC2_14,Shingle Creek 2 2014,,,364.23
+Sh1A,Shingle 1A,,,4265.587178
+Sh2A,Shingle 2A,,,3540.4
+BH2,Brian Head 2,,,1837.290472
+BH5A,Brian Head 5A,,,1537.7
+TM1,Trail Mountain 1,,,1280.096189
+TM2A,Trail Mountain 2A,,,380.5
+LF1,Lake Fork 1,,,12123.5
+LF1A,Lake Fork 1A,,,6708.347
+PBC1,POCR Blind Canyon 1,,,788.0252619
+CS1A,Clay Springs 1A,,,783.8665
+CS2A,Clay Springs 2A,,,945.3613
+CS3A,Clay Springs 3A,,,1150.642

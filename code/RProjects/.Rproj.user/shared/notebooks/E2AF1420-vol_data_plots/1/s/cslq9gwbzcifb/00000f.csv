@@ -1,0 +1,2 @@
+"0","vol_min_plot = ggplot(data = na.omit(min_vol_perc), aes(Year, EstVol, color = Name, group = Name)) + geom_point() + geom_line() + ylim(0,100) + scale_x_discrete(limit=c('EstInt','t_0', 't_1','t_2','t_3','t_4','t_5','t_6','t_7','t_8','t_9')) + ylab('Percent of Volume') + xlab('Year since Debris Flow') + ggtitle('Min Vol')"
+"0","vol_min_plot"

@@ -1,0 +1,4 @@
+"0","l1 = list(3,4,5,6,7,8,9,10,11,12,13)"
+"0","for (i in l1){"
+"0","  gross_sum_t_perc[,i] = round((gross_sum_tdf[,i]/gross_sum_tdf[,2]*100),1)"
+"0","}"

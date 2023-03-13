@@ -1,0 +1,118 @@
+```{R}
+folder = 'C:\\Users\\clang\\Documents\\USU\\DF_Areas\\data\\data_sheets\\processed_summary_data'
+setwd(folder)
+library(readxl)
+gsdvol= read_excel('Catchment_Stats_gartneredits.xlsx', sheet = 'GSD and Vol Est', na = ' ')
+```
+```{r}
+est_vol = gsdvol[c(1,23)]
+wall_vol = gsdvol[,c(1,21)]
+g14obs = gsdvol[,c(1,22)]
+g14_2yr = gsdvol[,c(1,24)]
+g14_5yr = gsdvol[,c(1,25)]
+g14_10yr = gsdvol[,c(1,26)]
+g14_25yr = gsdvol[,c(1,27)]
+g14_50yr = gsdvol[,c(1,28)]
+g14_100yr =gsdvol[,c(1,29)]
+g14_200yr= gsdvol[,c(1,30)]
+g14_500yr = gsdvol[,c(1,31)]
+g14_1000yr = gsdvol[,c(1,32)]
+```
+```{r}
+est = 'imagery'
+wall = 'Wall'
+gobs = 'G14 Historical 15min'
+g2 = 'i15_2yr'
+g5 = 'i15_5yr'
+g10 = 'i15_10yr'
+g25 = 'i15_25yr'
+g50 = 'i15_50yr'
+g100 = 'i15_100yr'
+g200 = 'i15_200yr'
+g500 = 'i15_500yr'
+g1000 = 'i15_1000yr'
+gart = 'G14 15min Recurrence Interval'
+```
+
+
+```{r}
+wall_vol = cbind(wall_vol, wall)
+colnames(wall_vol) = c('Site','VolM', 'Source')
+g14obs = cbind(g14obs, gobs)
+colnames(g14obs) = c('Site','VolM', 'Source')
+g14_2yr = cbind(g14_2yr, g2)
+colnames(g14_2yr) = c('Site','VolM', 'Source')
+g14_5yr = cbind(g14_5yr, g5)
+colnames(g14_5yr) = c('Site','VolM', 'Source')
+g14_10yr = cbind(g14_10yr, g10)
+colnames(g14_10yr) = c('Site','VolM', 'Source')
+g14_25yr = cbind(g14_25yr, g25)
+colnames(g14_25yr) = c('Site','VolM', 'Source')
+g14_50yr = cbind(g14_50yr, g50)
+colnames(g14_50yr) = c('Site','VolM', 'Source')
+g14_100yr = cbind(g14_100yr, g100)
+colnames(g14_100yr)= c('Site','VolM', 'Source')
+g14_200yr = cbind(g14_200yr, g200)
+colnames(g14_200yr) = c('Site','VolM', 'Source')
+g14_500yr = cbind(g14_500yr, g500)
+colnames(g14_500yr) = c('Site','VolM', 'Source')
+g14_1000yr = cbind(g14_1000yr, g1000)
+colnames(g14_1000yr) = c('Site','VolM', 'Source')
+```
+```{r}
+est_vol = cbind(est_vol, est)
+colnames(est_vol)= c('Site', 'VolM', 'Source')
+g14_2yrg = cbind(g14_2yr[1:2], gart)
+colnames(g14_2yrg) = c('Site','VolM', 'Source')
+g14_5yrg = cbind(g14_5yr[1:2], gart)
+colnames(g14_5yrg) = c('Site','VolM', 'Source')
+g14_10yrg = cbind(g14_10yr[1:2], gart)
+colnames(g14_10yrg) = c('Site','VolM', 'Source')
+g14_25yrg = cbind(g14_25yr[1:2], gart)
+colnames(g14_25yrg) = c('Site','VolM', 'Source')
+g14_50yrg = cbind(g14_50yr[1:2], gart)
+colnames(g14_50yrg) = c('Site','VolM', 'Source')
+g14_100yrg = cbind(g14_100yr[1:2], gart)
+colnames(g14_100yrg)= c('Site','VolM', 'Source')
+g14_200yrg = cbind(g14_200yr[1:2], gart)
+colnames(g14_200yrg) = c('Site','VolM', 'Source')
+g14_500yrg = cbind(g14_500yr[1:2], gart)
+colnames(g14_500yrg) = c('Site','VolM', 'Source')
+g14_1000yrg = cbind(g14_1000yr[1:2], gart)
+colnames(g14_1000yrg) = c('Site','VolM', 'Source')
+```
+
+```{r}
+g14 = g14_2yrg
+g14 = rbind(g14_5yrg,g14_10yrg,g14_25yrg,g14_50yrg,g14_100yrg,g14_200yrg,g14_500yrg,g14_1000yrg, g14obs, wall_vol)
+g14 = cbind(g14, est_vol[2])
+colnames(g14) = c('Site', 'VolM', 'Source', 'EstVol')
+gartnervol= rbind(g14_2yr,g14_5yr,g14_10yr,g14_25yr,g14_50yr,g14_100yr,g14_200yr,g14_500yr,g14_1000yr)
+```
+```{r}
+gartnervol= cbind(gartnervol, est_vol[2])
+colnames(gartnervol) = c('Site', 'VolM', 'Source', 'EstVol')
+histgagevol = cbind(g14obs,est_vol[2])
+colnames(histgagevol) = c('Site', 'VolM', 'Source', 'EstVol')
+wallestvol = cbind(wall_vol, est_vol[2])
+colnames(wallestvol) = c('Site', 'VolM', 'Source', 'EstVol')
+```
+
+```{r}
+gartnervol_plot = ggplot(data = na.omit(gartnervol), aes(EstVol, VolM, color = Source)) + geom_point() + geom_abline(mapping = NULL, data = NULL, 1, 0) + xlim(0,15000) + ylim(0,15000) +ylab('Modeled Initial Volume (m3)') + xlab('Estimated Initial Volume from Imagery (m3)') + ggtitle('Gartner (2014) Modeled Volume using 15 min Recurrence Intervals') + theme_bw() 
+gartnervol_plot
+```
+```{r}
+histgageplot = ggplot(data = na.omit(histgagevol), aes(EstVol, VolM, color = Source)) + geom_point() + geom_abline(mapping = NULL, data = NULL, 1, 0) +xlim(0,15000) + ylim(0,15000) +ylab('Modeled Initial Volume (m3)') + xlab('Estimated Initial Volume from Imagery (m3)') + ggtitle('Gartner (2014) Modeled Volume using Historical 15 min Gage Data') + theme_bw() + theme(legend.position = 'none')
+histgageplot
+```
+
+```{r}
+wallvolplot = ggplot(data = na.omit(wallestvol), aes(EstVol, VolM, color = Source)) + geom_point() +geom_abline(mapping = NULL, data = NULL, 1, 0) +xlim(0,15000) + ylim(0,15000) +ylab('Modeled Initial Volume (m3)') + xlab('Estimated Initial Volume from Imagery (m3)') + ggtitle('Wall (2022) Volume Model')+ theme_bw() + theme(legend.position = 'none')
+wallvolplot
+```
+
+```{r}
+allplot = ggplot(data = na.omit(g14), aes(EstVol, VolM, color = Source)) + geom_point() + geom_abline(mapping = NULL, data = NULL, 1, 0) + ylim(0,15000) +ylab('Modeled Initial Volume (m3)') + xlab('Estimated Initial Volume from Imagery (m3)') + ggtitle('Gartner (2014) and Wall (2022) Volume Models') + theme_bw()
+allplot
+```

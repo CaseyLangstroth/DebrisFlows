@@ -1,0 +1,7 @@
+"0","for (i in l1) {"
+"0","  perc_FC5_1[,i] = round((twitchell_FC5_1[,i]/twitchell_FC5_1[,2]*100),1)"
+"0","  perc_FC5_2[,i] = round((twitchell_FC5_2[,i]/twitchell_FC5_2[,2]*100),1)"
+"0","  perc_FC6[,i] = round((twitchell_FC6[,i]/twitchell_FC6[,2]*100),1)"
+"0","  perc_FC7[,i] = round((twitchell_FC7[,i]/twitchell_FC7[,2]*100),1)"
+"0","  perc_SC2[,i] = round((twitchell_SC2[,i]/twitchell_SC2[,2]*100),1)"
+"0","}"

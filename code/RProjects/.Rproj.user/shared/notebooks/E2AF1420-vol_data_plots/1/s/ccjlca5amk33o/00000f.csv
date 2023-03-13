@@ -1,0 +1,2 @@
+"0","gross_voltdf_pco = ggplot(data = na.omit(pole_creek_to), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent of Volume')  +  geom_line() +ggtitle('Pole Creek Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', 't_0', 't_1', 't_2', 't_3'))"
+"0","gross_voltdf_pco"

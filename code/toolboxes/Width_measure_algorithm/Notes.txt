@@ -1,0 +1,26 @@
+
+
+This is a set of ArcGIS tools for valley width measuring in optimal locations.
+It mostly fits basins including valley order between 2-5 (sensu Strahler).   
+The algorithm is described in the Supplement of the article:
+"Drainage reorganization induces deviations in the scaling between
+ valley width and drainage area" by Harel et. al., 2022. 
+
+To run the algorithm, first generate the required rasters with the
+toolbox "1 pre_vbet".
+Then apply the VBET tool (Gilbert et. al., 2016), which is attached in the folder "2_VBET". 
+Finally, run the tools in the toolbox "3_post_vbet" in order, i.e., 3a, 3b..etc.
+Each step produces outputs that are used in the next tool. 
+The final output is “intrsct_pts.shp”. This is a shapefile with points generated along the intersections between the width transects and the channel talweg (flowlines). 
+The shapefile table contains the coordinates, valley width, elevation and flow accumulation of each point. 
+
+Feel free to contact me, 
+Elhanan
+Elhanan02@gmail.com
+ 
+References to the free-access tools that are used in this folder: 
+Dilts, T.E., 2015, Polygon to Centerline Tool for ArcGIS: University of Nevada Reno, http://www.arcgis.com/home/item.html?id=bc642731870740aabf48134f90aa6165. 
+
+Gabrish, G., 2020, Create Perpendicular Lines for ArcGIS.:, https://github.com/ShuksanGeomatics/Create_Perpendicular_Lines_ArcGIS. 
+
+Gilbert, J.T., Macfarlane, W.W., and Wheaton, J.M., 2016, The Valley Bottom Extraction Tool (V-BET): A GIS tool for delineating valley bottoms across entire drainage networks: Computers and Geosciences, v. 97, p. 1–14, doi: 10.1016/j.cageo.2016.07.014. 

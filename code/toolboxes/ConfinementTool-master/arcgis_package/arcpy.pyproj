@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{726d7e8e-14f2-4c01-9ebd-25ad016cbf68}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>ConfiningMargins.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+    <CommandLineArguments>"1" "2" "3" "4" "5" "6"</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ConfiningMargins.py" />
+    <Compile Include="DividePolygonBySegment.py" />
+    <Compile Include="geometry_functions.py" />
+    <Compile Include="gis_tools.py" />
+    <Compile Include="MovingWindow.py" />
+    <Compile Include="sfr_metadata\ExampleMetadata.py" />
+    <Compile Include="sfr_metadata\Metadata.py" />
+    <Compile Include="sfr_metadata\__init__.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Confinement_Toolbox.pyt" />
+    <Content Include="sfr_metadata\.git" />
+    <Content Include="sfr_metadata\Metadata.pyc" />
+    <Content Include="sfr_metadata\README.md" />
+    <Content Include="sfr_metadata\Samples\SampleMetadata0.1.xml" />
+    <Content Include="sfr_metadata\Samples\SampleMetadata0.2.xml" />
+    <Content Include="sfr_metadata\Samples\SampleMetadata0.3.xml" />
+    <Content Include="sfr_metadata\SFR_Metadata_Module.pyproj" />
+    <Content Include="sfr_metadata\Validation\MetadataValidation0.3.xsd" />
+    <Content Include="sfr_metadata\__init__.pyc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="sfr_metadata\" />
+    <Folder Include="sfr_metadata\Samples\" />
+    <Folder Include="sfr_metadata\Validation\" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
