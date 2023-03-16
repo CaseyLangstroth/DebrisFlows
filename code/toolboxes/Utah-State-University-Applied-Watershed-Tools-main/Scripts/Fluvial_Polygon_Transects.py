@@ -23,7 +23,7 @@ if usegui==False:
     #polygon that overlaps input polygon where points will not be generated
     exludeaoi=r'D:\test\VB3\VB_RM.shp'#r'D:\test\area2exlclude.shp' #optional set to [] if not using
     # removes all points with x distance of intersection of centerline and polygon
-    rmprad=25#optional set to [] if not using
+    rmprad=[]#optional set to [] if not using
     #output directory
     out_dir=r"D:\test\VB3"
     #basename for outputs
@@ -54,7 +54,7 @@ if usegui==True:
     
     # search radius to exlude points near polygon and centline interesections
     try:
-        rmprad=arcpy.GetParameter(6)#optional set to [] if not using
+        rmprad=[]#optional set to [] if not using
     except:
         rmprad=[]
         
