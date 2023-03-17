@@ -54,7 +54,7 @@ if usegui==True:
     
     # search radius to exlude points near polygon and centline interesections
     try:
-        rmprad=[]#optional set to [] if not using
+        rmprad=arcpy.GetParameterAsText(6)#optional set to [] if not using
     except:
         rmprad=[]
         

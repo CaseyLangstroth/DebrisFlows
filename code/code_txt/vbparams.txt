@@ -1,0 +1,10 @@
+st = 350
+lb = 300
+sb = 10
+disag = 50
+minth = -4
+max th = 4
+aggdis = 75
+min area = 10
+min hole = 8000
+smoothing = 80

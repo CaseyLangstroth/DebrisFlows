@@ -1,0 +1,11 @@
+aprx = arcpy.mp.ArcGISProject('CURRENT')
+    mps =aprx.listMaps()
+    DF_lyrs =[]
+    for i in mps:
+        DF_lyrs = i.listLayers()
+    for i in DF_lyrs:
+        if DFGroupLayer in i.longName:
+            if i.isGroupLayer== False:
+                DF_lyrs.append(i)
+
+where DFGroupLayer is grouplayer but GetParameterAsText
