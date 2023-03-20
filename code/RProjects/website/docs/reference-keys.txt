@@ -1,3 +1,4 @@
+fig:image
 fig:nice-fig
 tab:nice-tab
 eq:binom
@@ -6,8 +7,8 @@ about
 usage
 render-book
 preview-book
-hello-bookdown
-a-section
+database-structure
+code-for-designing-and-building-my-database-structure-in-r
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

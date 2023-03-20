@@ -1,11 +1,10 @@
 # Database Structure:
 
-###{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%'}
-###knitr::include_graphics("/_bookdown_files/_main_files/figure-html/database_structure.png")
-I can't get my pic to load... can't find the file? will try to figure this out in class...
-
+```{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%'}
+knitr::include_graphics("C:/Users/clang/Documents/USU/DF_Areas/debris_flow_stats/code/RProjects/website/docs/_main_files/figure-html/database_structure.png")
+```
 # Code for designing and building my database structure in R
-```{r}
+```{r eval =FALSE, echo = TRUE}
 #### Building a database
 setwd('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\data_sheets')
 
