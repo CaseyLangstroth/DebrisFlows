@@ -24,7 +24,7 @@ def chk_mk_dir(in_dir):
 # =============================================================================
 # Begin Tool    
 # =============================================================================
-def ReachDisc (DFGroupLayer, streamshp, subcatch, buffdis, out_dir):
+def ReachDisc (DFGroupLayer, streamshp, pp, subcatch, buffdis, out_dir):
     
     path = os.path.join(out_dir, 'temp\\')
     chk_mk_dir(path)
@@ -44,7 +44,12 @@ def ReachDisc (DFGroupLayer, streamshp, subcatch, buffdis, out_dir):
         if DFGroupLayer in i.longName:
             if i.isGroupLayer== False:
                 if i.name.endswith('Assumed_Original'):
-                    DF_Originals.append(i)                
+                    DF_Originals.append(i)
+                    
+
+    ################ Copy input stream to avoid editing it ################
+    copystream = path + 'copystream'
+    arcpy.conversion.ExportFeatures(streamshp, copystream)
 # =============================================================================
 # Find DF IDs     
 # =============================================================================
@@ -75,64 +80,49 @@ def ReachDisc (DFGroupLayer, streamshp, subcatch, buffdis, out_dir):
        buff = buffdis + ' Meters'
        outputbuff = path + DF_ID + 'fullbuffer'
        arcpy.analysis.Buffer(x, outputbuff, buff , '', '', 'ALL')
-       
        ########## ring buffer and dissolve ###########################
        outputringbuff = path + DF_ID + 'bufferring' 
        arcpy.analysis.Buffer(x, outputringbuff, buff , 'OUTSIDE_ONLY','', 'ALL')
 # =============================================================================
 # Delineate stream near DF        
 # =============================================================================
-       ################ clip streamshp to buffer ############################# 
+       ################ clip copystream to buffer ############################# 
        outputstream = path + DF_ID + 'outstream' 
-       arcpy.analysis.Intersect([streamshp, outputbuff], outputstream)
+       arcpy.analysis.Intersect([outputbuff, copystream], outputstream)
        # buffer selects lines within DF fan but not on top of fan
-       
        ############### delete tributary streams if applicable ################
        select = arcpy.management.SelectLayerByLocation(outputstream, 'INTERSECT', subcatch, '', 'NEW_SELECTION')
        arcpy.management.DeleteFeatures(select)
        dfall = path + DF_ID+ 'dflineall' 
        arcpy.management.Dissolve(outputstream, dfall)
-     
        ############## split stream into polygon overlap ######################
        dfpoly = path + DF_ID + 'dfpolystream' 
        arcpy.analysis.Intersect([outputstream,x], dfpoly)
-       
        ############## split stream at buffer overlap #########################
        dfbuff = path + DF_ID + 'buffstream' 
        arcpy.analysis.Intersect([outputstream, outputringbuff], dfbuff)
        dfbuffparts = path + DF_ID + 'buffparts'
        dfbuffpts = path + DF_ID+ 'dfbuffpts'
-       # parts = []
-       # with arcpy.da.SearchCursor(dfbuff, '*') as cursor:
-       #     for row in cursor:
-       #         select = arcpy.management.SelectLayerByAttribute(dfbuff)
-       #         arcpy.conversion.ExportFeatures(select, dfbuffpts)
-       #         parts.append(dfbuffpts)
-       # arcpy.management.Merge(parts,dfbuffparts)
-               
-       arcpy.management.FeatureVerticesToPoints(dfbuff, dfbuffpts, 'BOTH_ENDS')
-       arcpy.management.SplitLineAtPoint(dfbuff, dfbuffpts, dfbuffparts)
+       arcpy.management.MultipartToSinglepart(dfbuff, dfbuffparts)
+       arcpy.management.FeatureVerticesToPoints(dfbuffparts, dfbuffpts, 'BOTH_ENDS')
 # ============================================================================
 # Find Lines that are artifically long due to buffer        
 # =============================================================================
        ############ add end points to full line ##############################
        dfendpts = path + DF_ID + 'dfendpts'
        arcpy.management.FeatureVerticesToPoints(dfall, dfendpts, 'BOTH_ENDS')
-       
        ############ Find and delete line segment that touches edge of buffer #
-       arcpy.analysis.Near(dfbuffparts, dfendpts)
-       with arcpy.da.UpdateCursor(dfbuffparts, 'NEAR_DIST') as cursor:
-           for row in cursor:
-               if row[0] < 1:
-                   cursor.deleteRow()
+       ptbuff = path + DF_ID + 'ptbuffer'
+       arcpy.analysis.Buffer(dfendpts, ptbuff, '1 Meter')
+       select = arcpy.management.SelectLayerByLocation(dfbuffparts, 'INTERSECT', ptbuff, '', 'NEW_SELECTION')
+       arcpy.management.DeleteFeatures(select)
 # =============================================================================
 # Finally, get df reach line
 # =============================================================================
        dfreachp = path + DF_ID + 'dfreachprts'
        arcpy.management.Merge([dfbuffparts, dfpoly], dfreachp)
        dfreach = path + DF_ID + 'dfreach'
-       arcpy.management.Dissolve(dfreachp, dfreach)
-       
+       arcpy.management.Dissolve(dfreachp, dfreach)   
 # =============================================================================
 # Get the details of the reach
 # =============================================================================
@@ -154,32 +144,92 @@ def ReachDisc (DFGroupLayer, streamshp, subcatch, buffdis, out_dir):
 # =============================================================================
 # Begin Reach Discretization
 # =============================================================================
-       # dissolve original stream because it is split at tribs via USUAL code #
+       ##########remove all tribs and dissolve entire stream
+       select = arcpy.management.SelectLayerByLocation(copystream, 'INTERSECT', subcatch, '', 'NEW_SELECTION')
+       arcpy.management.DeleteFeatures(select)
        dstream = path + 'dissolvedstr'
-       arcpy.management.Dissolve(streamshp, dstream)
+       arcpy.management.Dissolve(copystream, dstream)
        # get up and downstream start points
        rchpts = path + DF_ID + 'rchpts'
-       arcpy.management.FeatureVerticesToPoints(dfreach,rchpts, 'BOTH_ENDS')
+       arcpy.management.FeatureVerticesToPoints(dfreach, rchpts, 'BOTH_ENDS')
        # split dissolved stream to reach points
        splitstr = path + DF_ID+ 'splitstr'
        arcpy.management.SplitLineAtPoint(dstream, rchpts, splitstr, '100 Meters')
-       ## delete duplicate df reach
-       select = arcpy.management.SelectLayerByLocation(splitstr, 'INTERSECT', x)
+       # delete duplicate df reach
+       select = arcpy.management.SelectLayerByLocation(splitstr, 'INTERSECT', ptbuff, '', 'NEW_SELECTION', 'INVERT')
        arcpy.management.DeleteFeatures(select)
-       # ### generate points to split stream at dfreach length
-       distpts = path + DF_ID + 'distpts'
-       for i in dfreachl:
-           arcpy.management.GeneratePointsAlongLines(splitstr, distpts, 'DISTANCE', i, '', 'END_POINTS')
        # get start/end points of reach
-       # arcpy.analysis.Near(distpts, rchpts)
-       # with arcpy.da.UpdateCursor(distpts, 'NEAR_DIST') as cursor:
-       #     for row in cursor:
-       #         if row[0] < 1:
-       #             cursor.deleteRow()
-       spreach = path + DF_ID + 'spreaches'
-       arcpy.management.SplitLineAtPoint(splitstr, distpts, spreach, '100 Meters')
+       arcpy.analysis.Near(splitstr, pp)
+       dists = []
+       with arcpy.da.SearchCursor(splitstr, 'NEAR_DIST') as cursor:
+           for row in cursor:
+               dists.append(row[0])
+       distsort = sorted(dists)
+       downstreamr = path + DF_ID + 'dwnstrm'
+       upstreamr = path + DF_ID + 'upstrm'
+       with arcpy.da.SearchCursor(splitstr, 'NEAR_DIST') as cursor:
+           for row in cursor:
+               expressiondw = '"NEAR_DIST" ={}'.format(distsort[0])
+               select = arcpy.management.SelectLayerByAttribute(splitstr, 'NEW_SELECTION', expressiondw)
+               arcpy.conversion.ExportFeatures(select, downstreamr)
+       with arcpy.da.SearchCursor(splitstr, 'NEAR_DIST') as cursor:
+           for row in cursor:
+               expressionup = '"NEAR_DIST" ={}'.format(distsort[1])
+               select = arcpy.management.SelectLayerByAttribute(splitstr, 'NEW_SELECTION', expressionup)
+               arcpy.conversion.ExportFeatures(select, upstreamr)
+       # generate points to split downstream at dfreach length
+       dwnpts = path + DF_ID + 'dwnpts'
+       for i in dfreachl:
+           arcpy.management.GeneratePointsAlongLines(downstreamr, dwnpts, 'DISTANCE', i)
+       downstream = path + DF_ID + 'dwnreach'
+       arcpy.management.SplitLineAtPoint(downstreamr, dwnpts, downstream)                               
+       desc = arcpy.Describe(downstream)
+       fields = desc.fields
+       fieldsname = []
+       for i in fields:
+           fieldsname.append(i.name)
+       if 'Id' in fieldsname:
+           arcpy.management.CalculateField(downstream, 'Id', 3)
+       else:
+            arcpy.management.AddField(downstream, 'Id', 'SHORT')
+            arcpy.management.CalculateField(downstream, 'Id', 3)
+       select = arcpy.management.SelectLayerByLocation(downstream, 'WITHIN_A_DISTANCE', x, '1 Meter', '', 'INVERT')
+       arcpy.management.DeleteFeatures(select)
+       arcpy.management.AddGeometryAttributes(downstream, 'LENGTH_GEODESIC', 'METERS')
+       # split upstream portion
+       arcpy.edit.FlipLine(upstreamr)
+       uppts = path + DF_ID + 'uppts'
+       for i in dfreachl:
+           arcpy.management.GeneratePointsAlongLines(upstreamr, uppts, 'DISTANCE', i)
+       upstream = path + DF_ID + 'upreach'
+       arcpy.management.SplitLineAtPoint(upstreamr, uppts, upstream, '100 Meters')                               
+       desc = arcpy.Describe(upstream)
+       fields = desc.fields
+       fieldsname = []
+       for i in fields:
+           fieldsname.append(i.name)
+       if 'Id' in fieldsname:
+           arcpy.management.CalculateField(upstream, 'Id', 1)
+       else:
+            arcpy.management.AddField(upstream, 'Id', 'SHORT')
+            arcpy.management.CalculateField(upstream, 'Id', 1)
+       select = arcpy.management.SelectLayerByLocation(upstream, 'WITHIN_A_DISTANCE', x, '1 meter', 'NEW_SELECTION', 'INVERT')
+       arcpy.management.DeleteFeatures(select)
+       arcpy.management.AddGeometryAttributes(upstream, 'LENGTH_GEODESIC', 'METERS')
+       ######### get end points of up and downstream reaches
+       dpts = path + DF_ID + 'dpts'
+       arcpy.management.FeatureVerticesToPoints(downstream, dpts, 'BOTH_ENDS')
+       upts = path + DF_ID + 'upts'
+       arcpy.management.FeatureVerticesToPoints(upstream, upts, 'BOTH_ENDS')
+# ==============================================================================
+# Finally merge final lines and points   
+# =============================================================================
+       reaches = fpath + DF_ID + 'reaches' 
+       arcpy.management.Merge([dfreach, upstream, downstream], reaches)
+       reachpts = fpath + DF_ID + 'reachpts'
+       arcpy.management.Merge([upts, dpts], reachpts)
+ 
        
-      
     return
 # This is used to execute code if the file was run but not imported
 if __name__ == '__main__':
@@ -187,9 +237,10 @@ if __name__ == '__main__':
     # Tool parameter accessed with GetParameter or GetParameterAsText
     DFGroupLayer = arcpy.GetParameterAsText(0)
     streamshp = arcpy.GetParameterAsText(1)
-    subcatch = arcpy.GetParameterAsText(2)
-    buffdis = arcpy.GetParameterAsText(3)
-    out_dir = arcpy.GetParameterAsText(4)
+    pp = arcpy.GetParameterAsText(2)
+    subcatch = arcpy.GetParameterAsText(3)
+    buffdis = arcpy.GetParameterAsText(4)
+    out_dir = arcpy.GetParameterAsText(5)
     
-    ReachDisc(DFGroupLayer, streamshp, subcatch, buffdis, out_dir)
+    ReachDisc(DFGroupLayer, streamshp, pp, subcatch, buffdis, out_dir)
     
