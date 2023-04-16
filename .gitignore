@@ -1,5 +1,6 @@
 *.docx
 *.png
+!docs/*.png
 *.jpg
 *.kmz
 *.tif

@@ -1,5 +1,0 @@
-"0","folder = 'C:\\Users\\clang\\Documents\\USU\\DF_Areas\\data\\data_sheets\\processed_summary_data\\'"
-"0","setwd(folder)"
-"2","Warning: The working directory was changed to C:/Users/clang/Documents/USU/DF_Areas/data/data_sheets/processed_summary_data inside a notebook chunk. The working directory will be reset when the chunk is finished running. Use the knitr root.dir option in the setup chunk to change the working directory for notebook chunks."
-"0","gross_sum_tdf_o = read.csv('Gross_Summary_Vol_tdf_corrected-omitfield.csv', header = T, na.strings = ' ')"
-"0","head(gross_sum_tdf_o)"

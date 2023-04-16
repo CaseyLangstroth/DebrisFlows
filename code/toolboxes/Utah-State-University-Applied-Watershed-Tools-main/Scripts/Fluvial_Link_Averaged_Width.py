@@ -162,12 +162,12 @@ widthRaster=out_id+"_widthraster.tif"
 arcpy.ddd.TinRaster(outTIN, widthRaster, "FLOAT", "LINEAR", "CELLSIZE", 1, dxr)
 
 # use zonal statistics to compute average along each link
-outtbl=out_tmp_id+"_width.dbf"
-arcpy.sa.ZonalStatisticsAsTable(infc_pline, 'Id', widthRaster, outtbl, '', 'MEAN')
-arcpy.JoinField_management(infc_pline, 'Id', outtbl, 'Id','MEAN')
-arcpy.AddField_management(infc_pline, outfield, "DOUBLE")
-arcpy.management.CalculateField(infc_pline,outfield , '!MEAN!', 'PYTHON_9.3')
-arcpy.management.DeleteField(infc_pline,'MEAN')
+##outtbl=out_tmp_id+"_width.dbf"
+##arcpy.sa.ZonalStatisticsAsTable(infc_pline, 'FID', widthRaster, outtbl, '', 'MEAN')
+##arcpy.JoinField_management(infc_pline, 'FID', outtbl, 'FID_','MEAN')
+##arcpy.AddField_management(infc_pline, outfield, "DOUBLE")
+##arcpy.management.CalculateField(infc_pline,outfield , '!MEAN!', 'PYTHON_9.3')
+##arcpy.management.DeleteField(infc_pline,'MEAN')
 
 print2("Finished! Final outputs are located: \n"+out_dir,usegui)
 print2("Final link averaged data has been appended to: \n"+infc_pline,usegui)
