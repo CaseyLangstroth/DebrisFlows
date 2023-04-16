@@ -1,7 +1,7 @@
 # Database Structure:
 
 ```{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%', echo= FALSE}
-knitr::include_graphics("C:/Users/clang/Documents/USU/DF_Areas/debris_flow_stats/docs/_main_files/figure-html/database_structure.png") #this probably won't work because my book isnt updating for some reason....
+knitr::include_graphics("C:/Users/clang/Documents/USU/DF_Areas/debris_flow_stats/docs/_main_files/figure-html/database_structure.png") 
 ```
 # Code for designing and building my database structure in R
 ```{r eval =FALSE, echo = TRUE}
