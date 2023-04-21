@@ -1,0 +1,18 @@
+--- 
+title: "Constraining Erosion of Post-Wildfire Debris Flow Fans"
+author: "Casey Langstroth"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+description: |
+  This is a bookdown website for my thesis project for RDS2023.
+link-citations: yes
+github-repo: "rstudio/bookdown-demo"
+---
+
+# About
+
+This is a bookdown website for my thesis project and for the final project for RDS2023. Each chapter documents code and data management for each step along the way. 

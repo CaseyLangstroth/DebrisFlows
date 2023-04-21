@@ -1,0 +1,3 @@
+library(tidyverse)
+test = select(df_morph, where(is.numeric))
+pairs(test)

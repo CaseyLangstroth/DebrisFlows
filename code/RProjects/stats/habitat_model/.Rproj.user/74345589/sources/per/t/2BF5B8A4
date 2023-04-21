@@ -1,0 +1,27 @@
+{
+    "id": "2BF5B8A4",
+    "path": "C:/Documents/Pyramid_Lake/RCreations/RProjects/habitat_cpue_regress/composition_transformations.R",
+    "project_path": "composition_transformations.R",
+    "type": "r_source",
+    "hash": "1841222796",
+    "contents": "",
+    "dirty": false,
+    "created": 1677516994655.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "144,29",
+        "scrollLine": "112"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680456128,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680456128296,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,27 @@
+{
+    "id": "A05A8103",
+    "path": "C:/Documents/Pyramid_Lake/RCreations/RProjects/habitat_cpue_regress/habitat_glm_1.R",
+    "project_path": "habitat_glm_1.R",
+    "type": "r_source",
+    "hash": "199267610",
+    "contents": "",
+    "dirty": false,
+    "created": 1676652672317.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "218,0",
+        "scrollLine": "154"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680457263,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680457263865,
+    "read_only": false,
+    "read_only_alternatives": []
+}

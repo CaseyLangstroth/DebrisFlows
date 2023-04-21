@@ -1,0 +1,28 @@
+{
+    "id": "423ED983",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1681853810546.0,
+    "source_on_save": false,
+    "relative_order": 12,
+    "properties": {
+        "id": "1e72889961e644fca8a6e06edc4ee48b",
+        "name": "sinuosityplot",
+        "title": "sinuosityplot",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 0,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1681853810546,
+    "read_only": false,
+    "read_only_alternatives": []
+}

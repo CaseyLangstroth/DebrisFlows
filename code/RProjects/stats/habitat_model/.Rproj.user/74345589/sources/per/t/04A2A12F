@@ -1,0 +1,27 @@
+{
+    "id": "04A2A12F",
+    "path": "C:/Documents/Pyramid_Lake/RCreations/RProjects/habitat_cpue_regress/linear_models.R",
+    "project_path": "linear_models.R",
+    "type": "r_source",
+    "hash": "1543025011",
+    "contents": "",
+    "dirty": false,
+    "created": 1680455032959.0,
+    "source_on_save": false,
+    "relative_order": 7,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "33,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1680455181,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1680455181576,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,0 +1,46 @@
+# Examples of repeated operations in real life
+
+# Example 1 ####
+
+# Check which data (diet, GPS, morphometrscs) is available for each dragon individual
+
+# Load DBI
+
+library(DBI)
+
+dragons_db = dbConnect(drv = RSQLite::SQLite(),'C:\\Users\\clang\\Documents\\USU\\Classes\\Spring_2023\\WILD6900\\sql_exercises\\dragons.db')
+
+diet = dbGetQuery(conn = dragons_db,
+               'SELECT * FROM diet;')
+morphometrics = dbGetQuery(conn = dragons_db,
+                           'select * from morphometrics;')
+gps = dbGetQuery(conn = dragons_db,
+                 'select * from gps_data;')                       
+dragons = dbGetQuery(conn = dragons_db,
+                     'select * from dragons;')
+
+inds = dragons$dragon_id
+length(inds)
+
+inds[1] %in% morphometrics$dragon_id
+inds[1] %in% diet$dragon_id
+inds[1] %in% unique(gps$dragon_id)
+
+system.time({inds[1] %in% unique(gps$dragon_id)})
+system.time({inds[1] %in% gps$dragon_id})
+
+res = data.frame(dragons_id = NA,
+                 has_morphometrics = NA,
+                 has_gps = NA,
+                 has_diet = NA)
+
+for (i in 1:length(inds)){
+  res[i, ]$dragon_id <- inds[i]
+  res[i,]$has_morphometrics <- inds[i]%in% morphometrics$dragon_id
+  res[i,]$has_diet <- inds[i]%in% diet$dragon_id
+  res[i,]$has_gps <- inds[i]%in% gps$dragon_id
+}
+
+# Find individuals that have DPS and diet data
+
+nrow(res[res$has_gps & res$has_diet,])
