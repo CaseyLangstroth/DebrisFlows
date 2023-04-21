@@ -16,4 +16,3 @@ github-repo: "rstudio/bookdown-demo"
 # About
 
 This is a bookdown website for my thesis project and for the final project for RDS2023. Each chapter documents code and data management for each step along the way. 
-
