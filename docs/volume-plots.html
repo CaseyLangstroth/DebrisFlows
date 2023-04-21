@@ -158,12 +158,7 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
 <li class="chapter" data-level="2" data-path="database-structure.html"><a href="database-structure.html"><i class="fa fa-check"></i><b>2</b> Database Structure:</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="database-structure.html"><a href="database-structure.html#code-for-designing-and-building-my-database-structure-in-r"><i class="fa fa-check"></i><b>2.1</b> Code for designing and building my database structure in R</a>
@@ -179,14 +174,11 @@ div.csl-indent {
 <li class="chapter" data-level="3.1.1" data-path="volume-plots.html"><a href="volume-plots.html#edit-the-column-names-and-create-new-percent-table-object"><i class="fa fa-check"></i><b>3.1.1</b> Edit the column names and create new percent table object</a></li>
 <li class="chapter" data-level="3.1.2" data-path="volume-plots.html"><a href="volume-plots.html#change-the-percent-the-estint-column-2-to-100"><i class="fa fa-check"></i><b>3.1.2</b> change the percent the EstInt column (2) to 100%</a></li>
 <li class="chapter" data-level="3.1.3" data-path="volume-plots.html"><a href="volume-plots.html#extract-the-debris-flows-per-fire-for-seperate-plots"><i class="fa fa-check"></i><b>3.1.3</b> Extract the debris flows per fire for seperate plots</a></li>
+<li class="chapter" data-level="3.1.4" data-path="volume-plots.html"><a href="volume-plots.html#pivot-longer-t-for-tibble"><i class="fa fa-check"></i><b>3.1.4</b> pivot longer (t for tibble)</a></li>
+<li class="chapter" data-level="3.1.5" data-path="volume-plots.html"><a href="volume-plots.html#add-in-fire-name"><i class="fa fa-check"></i><b>3.1.5</b> Add in fire name</a></li>
+<li class="chapter" data-level="3.1.6" data-path="volume-plots.html"><a href="volume-plots.html#plots"><i class="fa fa-check"></i><b>3.1.6</b> plots</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="volume-plots.html"><a href="volume-plots.html#subsetting-sites-with-multiple-debris-flows"><i class="fa fa-check"></i><b>3.2</b> subsetting sites with multiple debris flows</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="volume-plots.html"><a href="volume-plots.html#pivot-longer-t-for-tibble"><i class="fa fa-check"></i><b>3.2.1</b> pivot longer (t for tibble)</a></li>
-<li class="chapter" data-level="3.2.2" data-path="volume-plots.html"><a href="volume-plots.html#add-in-fire-name"><i class="fa fa-check"></i><b>3.2.2</b> Add in fire name</a></li>
-<li class="chapter" data-level="3.2.3" data-path="volume-plots.html"><a href="volume-plots.html#plots"><i class="fa fa-check"></i><b>3.2.3</b> plots</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="volume-plots.html"><a href="volume-plots.html#volume-compare-plots"><i class="fa fa-check"></i><b>3.3</b> Volume Compare Plots</a></li>
+<li class="chapter" data-level="3.2" data-path="volume-plots.html"><a href="volume-plots.html#volume-compare-plots"><i class="fa fa-check"></i><b>3.2</b> Volume Compare Plots</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="comparing-against-volume-prediction-models.html"><a href="comparing-against-volume-prediction-models.html"><i class="fa fa-check"></i><b>4</b> Comparing against Volume Prediction Models</a>
 <ul>
@@ -267,146 +259,77 @@ div.csl-indent {
 <span id="cb4-2"><a href="volume-plots.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> l1){</span>
 <span id="cb4-3"><a href="volume-plots.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  gross_sum_t_perc[,i] <span class="ot">=</span> <span class="fu">round</span>((gross_sum_tdf[,i]<span class="sc">/</span>gross_sum_tdf[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
 <span id="cb4-4"><a href="volume-plots.html#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>I will have to subset the multiple debris flow events into seperate objects to plot them as seperate lines, so remove the rows with those sites</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="volume-plots.html#cb5-1" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc <span class="ot">=</span> gross_sum_t_perc[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">14</span><span class="sc">:</span><span class="dv">21</span>, <span class="dv">23</span>),] <span class="do">## the sites are only in one fire, so this is easy to remove with indexing</span></span></code></pre></div>
 </div>
 <div id="extract-the-debris-flows-per-fire-for-seperate-plots" class="section level3 hasAnchor" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> Extract the debris flows per fire for seperate plots<a href="volume-plots.html#extract-the-debris-flows-per-fire-for-seperate-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="volume-plots.html#cb6-1" aria-hidden="true" tabindex="-1"></a>brian_head <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),]</span>
-<span id="cb6-2"><a href="volume-plots.html#cb6-2" aria-hidden="true" tabindex="-1"></a>dollar_ridge <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>),]</span>
-<span id="cb6-3"><a href="volume-plots.html#cb6-3" aria-hidden="true" tabindex="-1"></a>twitchell <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">11</span><span class="sc">:</span><span class="dv">22</span>),]</span>
-<span id="cb6-4"><a href="volume-plots.html#cb6-4" aria-hidden="true" tabindex="-1"></a>pole_creek <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">23</span><span class="sc">:</span><span class="dv">25</span>),]</span>
-<span id="cb6-5"><a href="volume-plots.html#cb6-5" aria-hidden="true" tabindex="-1"></a>seeley<span class="ot">=</span> gross_sum_t_perc[(<span class="dv">26</span><span class="sc">:</span><span class="dv">31</span>),]</span>
-<span id="cb6-6"><a href="volume-plots.html#cb6-6" aria-hidden="true" tabindex="-1"></a>shingle<span class="ot">=</span> gross_sum_t_perc[(<span class="dv">32</span><span class="sc">:</span><span class="dv">33</span>),]</span>
-<span id="cb6-7"><a href="volume-plots.html#cb6-7" aria-hidden="true" tabindex="-1"></a>trail_mountain <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">34</span><span class="sc">:</span><span class="dv">38</span>),]</span>
-<span id="cb6-8"><a href="volume-plots.html#cb6-8" aria-hidden="true" tabindex="-1"></a>clay_springs <span class="ot">=</span> gross_sum_t_perc[<span class="dv">39</span><span class="sc">:</span><span class="dv">43</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="volume-plots.html#cb5-1" aria-hidden="true" tabindex="-1"></a>brian_head <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>),]</span>
+<span id="cb5-2"><a href="volume-plots.html#cb5-2" aria-hidden="true" tabindex="-1"></a>dollar_ridge <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">3</span><span class="sc">:</span><span class="dv">10</span>),]</span>
+<span id="cb5-3"><a href="volume-plots.html#cb5-3" aria-hidden="true" tabindex="-1"></a>twitchell <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">11</span><span class="sc">:</span><span class="dv">31</span>),]</span>
+<span id="cb5-4"><a href="volume-plots.html#cb5-4" aria-hidden="true" tabindex="-1"></a>pole_creek <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">32</span><span class="sc">:</span><span class="dv">34</span>),]</span>
+<span id="cb5-5"><a href="volume-plots.html#cb5-5" aria-hidden="true" tabindex="-1"></a>seeley<span class="ot">=</span> gross_sum_t_perc[(<span class="dv">35</span><span class="sc">:</span><span class="dv">40</span>),]</span>
+<span id="cb5-6"><a href="volume-plots.html#cb5-6" aria-hidden="true" tabindex="-1"></a>shingle<span class="ot">=</span> gross_sum_t_perc[(<span class="dv">41</span><span class="sc">:</span><span class="dv">42</span>),]</span>
+<span id="cb5-7"><a href="volume-plots.html#cb5-7" aria-hidden="true" tabindex="-1"></a>trail_mountain <span class="ot">=</span> gross_sum_t_perc[(<span class="dv">43</span><span class="sc">:</span><span class="dv">47</span>),]</span>
+<span id="cb5-8"><a href="volume-plots.html#cb5-8" aria-hidden="true" tabindex="-1"></a>clay_springs <span class="ot">=</span> gross_sum_t_perc[<span class="dv">48</span><span class="sc">:</span><span class="dv">52</span>,]</span></code></pre></div>
 </div>
-</div>
-<div id="subsetting-sites-with-multiple-debris-flows" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> subsetting sites with multiple debris flows<a href="volume-plots.html#subsetting-sites-with-multiple-debris-flows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="volume-plots.html#cb7-1" aria-hidden="true" tabindex="-1"></a>twitchell_FC4 <span class="ot">=</span> gross_sum_tdf[<span class="dv">14</span>,]</span>
-<span id="cb7-2"><a href="volume-plots.html#cb7-2" aria-hidden="true" tabindex="-1"></a>twitchell_FC5_1 <span class="ot">=</span> gross_sum_tdf[<span class="dv">15</span>,]</span>
-<span id="cb7-3"><a href="volume-plots.html#cb7-3" aria-hidden="true" tabindex="-1"></a>twitchell_FC5_2 <span class="ot">=</span> gross_sum_tdf[<span class="dv">17</span>,]</span>
-<span id="cb7-4"><a href="volume-plots.html#cb7-4" aria-hidden="true" tabindex="-1"></a>twitchell_FC7_1 <span class="ot">=</span> gross_sum_tdf[<span class="dv">16</span>,]</span>
-<span id="cb7-5"><a href="volume-plots.html#cb7-5" aria-hidden="true" tabindex="-1"></a>twitchell_FC7_2 <span class="ot">=</span> gross_sum_tdf[<span class="dv">19</span>,]</span>
-<span id="cb7-6"><a href="volume-plots.html#cb7-6" aria-hidden="true" tabindex="-1"></a>twitchell_SC2 <span class="ot">=</span> gross_sum_tdf[<span class="dv">17</span>,]</span></code></pre></div>
-<p>new percents for subset sites</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="volume-plots.html#cb8-1" aria-hidden="true" tabindex="-1"></a>perc_FC4_1 <span class="ot">=</span> twitchell_FC4</span>
-<span id="cb8-2"><a href="volume-plots.html#cb8-2" aria-hidden="true" tabindex="-1"></a>perc_FC4_1[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-3"><a href="volume-plots.html#cb8-3" aria-hidden="true" tabindex="-1"></a>perc_FC5_1 <span class="ot">=</span> twitchell_FC5_1</span>
-<span id="cb8-4"><a href="volume-plots.html#cb8-4" aria-hidden="true" tabindex="-1"></a>perc_FC5_1[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-5"><a href="volume-plots.html#cb8-5" aria-hidden="true" tabindex="-1"></a>perc_FC5_2 <span class="ot">=</span> twitchell_FC5_2</span>
-<span id="cb8-6"><a href="volume-plots.html#cb8-6" aria-hidden="true" tabindex="-1"></a>perc_FC5_2[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-7"><a href="volume-plots.html#cb8-7" aria-hidden="true" tabindex="-1"></a>perc_FC7_1 <span class="ot">=</span> twitchell_FC7_1</span>
-<span id="cb8-8"><a href="volume-plots.html#cb8-8" aria-hidden="true" tabindex="-1"></a>perc_FC7_1[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-9"><a href="volume-plots.html#cb8-9" aria-hidden="true" tabindex="-1"></a>perc_FC7_2 <span class="ot">=</span> twitchell_FC7_2</span>
-<span id="cb8-10"><a href="volume-plots.html#cb8-10" aria-hidden="true" tabindex="-1"></a>perc_FC7_2[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-11"><a href="volume-plots.html#cb8-11" aria-hidden="true" tabindex="-1"></a>perc_SC2 <span class="ot">=</span> twitchell_SC2</span>
-<span id="cb8-12"><a href="volume-plots.html#cb8-12" aria-hidden="true" tabindex="-1"></a>perc_SC2[,<span class="dv">2</span>] <span class="ot">=</span> <span class="dv">100</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="volume-plots.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> l1) {</span>
-<span id="cb9-2"><a href="volume-plots.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  perc_FC4_1[,i] <span class="ot">=</span> <span class="fu">round</span>((twitchell_FC4[,i]<span class="sc">/</span>twitchell_FC4[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="volume-plots.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  perc_FC5_1[,i] <span class="ot">=</span> <span class="fu">round</span>((twitchell_FC5_1[,i]<span class="sc">/</span>twitchell_FC5_1[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
-<span id="cb9-4"><a href="volume-plots.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  perc_FC5_2[,i] <span class="ot">=</span> <span class="fu">round</span>((twitchell_FC5_2[,i]<span class="sc">/</span>twitchell_FC5_2[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
-<span id="cb9-5"><a href="volume-plots.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  perc_FC7_1[,i] <span class="ot">=</span> <span class="fu">round</span>((twitchell_FC7_1[,i]<span class="sc">/</span>twitchell_FC7_1[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
-<span id="cb9-6"><a href="volume-plots.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  perc_FC7_2[,i] <span class="ot">=</span> </span>
-<span id="cb9-7"><a href="volume-plots.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>((twitchell_FC7_2[,i]<span class="sc">/</span>twitchell_FC7_2[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>), <span class="dv">1</span>)</span>
-<span id="cb9-8"><a href="volume-plots.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  perc_SC2[,i] <span class="ot">=</span> <span class="fu">round</span>((twitchell_SC2[,i]<span class="sc">/</span>twitchell_SC2[,<span class="dv">2</span>]<span class="sc">*</span><span class="dv">100</span>),<span class="dv">1</span>)</span>
-<span id="cb9-9"><a href="volume-plots.html#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div id="pivot-longer-t-for-tibble" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> pivot longer (t for tibble)<a href="volume-plots.html#pivot-longer-t-for-tibble" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="volume-plots.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co">#for piping</span></span>
-<span id="cb10-2"><a href="volume-plots.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co">#for tibble</span></span></code></pre></div>
+<div id="pivot-longer-t-for-tibble" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> pivot longer (t for tibble)<a href="volume-plots.html#pivot-longer-t-for-tibble" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="volume-plots.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co">#for piping</span></span>
+<span id="cb6-2"><a href="volume-plots.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co">#for tibble</span></span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;tidyr&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:magrittr&#39;:
 ## 
 ##     extract</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="volume-plots.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#for plotting</span></span>
-<span id="cb13-2"><a href="volume-plots.html#cb13-2" aria-hidden="true" tabindex="-1"></a>brian_head_t <span class="ot">=</span> brian_head <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-3"><a href="volume-plots.html#cb13-3" aria-hidden="true" tabindex="-1"></a>dollar_ridge_t <span class="ot">=</span> dollar_ridge <span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-4"><a href="volume-plots.html#cb13-4" aria-hidden="true" tabindex="-1"></a>twitchell_t <span class="ot">=</span> twitchell <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-5"><a href="volume-plots.html#cb13-5" aria-hidden="true" tabindex="-1"></a>pole_creek_t <span class="ot">=</span> pole_creek <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-6"><a href="volume-plots.html#cb13-6" aria-hidden="true" tabindex="-1"></a>seeley_t <span class="ot">=</span> seeley <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-7"><a href="volume-plots.html#cb13-7" aria-hidden="true" tabindex="-1"></a>shingle_t <span class="ot">=</span> shingle <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-8"><a href="volume-plots.html#cb13-8" aria-hidden="true" tabindex="-1"></a>clay_springs_t <span class="ot">=</span> clay_springs <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-9"><a href="volume-plots.html#cb13-9" aria-hidden="true" tabindex="-1"></a>trail_mountain_t <span class="ot">=</span> trail_mountain <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-10"><a href="volume-plots.html#cb13-10" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t <span class="ot">=</span> gross_sum_t_perc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-11"><a href="volume-plots.html#cb13-11" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb13-12"><a href="volume-plots.html#cb13-12" aria-hidden="true" tabindex="-1"></a>perc_FC4_t <span class="ot">=</span> perc_FC4_1 <span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-13"><a href="volume-plots.html#cb13-13" aria-hidden="true" tabindex="-1"></a>perc_FC5_1_t <span class="ot">=</span> perc_FC5_1 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-14"><a href="volume-plots.html#cb13-14" aria-hidden="true" tabindex="-1"></a>perc_FC5_2_t <span class="ot">=</span> perc_FC5_2 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-15"><a href="volume-plots.html#cb13-15" aria-hidden="true" tabindex="-1"></a>perc_FC7_1_t <span class="ot">=</span> perc_FC7_1 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-16"><a href="volume-plots.html#cb13-16" aria-hidden="true" tabindex="-1"></a>perc_FC7_2_t <span class="ot">=</span> perc_FC7_2 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
-<span id="cb13-17"><a href="volume-plots.html#cb13-17" aria-hidden="true" tabindex="-1"></a>perc_SC2_t <span class="ot">=</span> perc_SC2 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="volume-plots.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#for plotting</span></span>
+<span id="cb9-2"><a href="volume-plots.html#cb9-2" aria-hidden="true" tabindex="-1"></a>brian_head_t <span class="ot">=</span> brian_head <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-3"><a href="volume-plots.html#cb9-3" aria-hidden="true" tabindex="-1"></a>dollar_ridge_t <span class="ot">=</span> dollar_ridge <span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-4"><a href="volume-plots.html#cb9-4" aria-hidden="true" tabindex="-1"></a>twitchell_t <span class="ot">=</span> twitchell <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-5"><a href="volume-plots.html#cb9-5" aria-hidden="true" tabindex="-1"></a>pole_creek_t <span class="ot">=</span> pole_creek <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-6"><a href="volume-plots.html#cb9-6" aria-hidden="true" tabindex="-1"></a>seeley_t <span class="ot">=</span> seeley <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-7"><a href="volume-plots.html#cb9-7" aria-hidden="true" tabindex="-1"></a>shingle_t <span class="ot">=</span> shingle <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span> EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-8"><a href="volume-plots.html#cb9-8" aria-hidden="true" tabindex="-1"></a>clay_springs_t <span class="ot">=</span> clay_springs <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-9"><a href="volume-plots.html#cb9-9" aria-hidden="true" tabindex="-1"></a>trail_mountain_t <span class="ot">=</span> trail_mountain <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-10"><a href="volume-plots.html#cb9-10" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t <span class="ot">=</span> gross_sum_t_perc <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols =</span>  EstInt<span class="sc">:</span><span class="st">&#39;10&#39;</span> , <span class="at">names_to =</span> <span class="st">&#39;Time&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;Volume&#39;</span>)</span>
+<span id="cb9-11"><a href="volume-plots.html#cb9-11" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="cn">NA</span></span></code></pre></div>
 </div>
-<div id="add-in-fire-name" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Add in fire name<a href="volume-plots.html#add-in-fire-name" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="volume-plots.html#cb14-1" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Brian Head&#39;</span></span>
-<span id="cb14-2"><a href="volume-plots.html#cb14-2" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">120</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Dollar Ridge&#39;</span></span>
-<span id="cb14-3"><a href="volume-plots.html#cb14-3" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">121</span><span class="sc">:</span><span class="dv">264</span>),<span class="dv">4</span>]<span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-4"><a href="volume-plots.html#cb14-4" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">265</span><span class="sc">:</span><span class="dv">300</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Pole Creek&#39;</span></span>
-<span id="cb14-5"><a href="volume-plots.html#cb14-5" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">301</span><span class="sc">:</span><span class="dv">372</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Seeley&#39;</span></span>
-<span id="cb14-6"><a href="volume-plots.html#cb14-6" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">373</span><span class="sc">:</span><span class="dv">396</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Shingle&#39;</span></span>
-<span id="cb14-7"><a href="volume-plots.html#cb14-7" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">297</span><span class="sc">:</span><span class="dv">456</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Trail Mountain&#39;</span></span>
-<span id="cb14-8"><a href="volume-plots.html#cb14-8" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">457</span><span class="sc">:</span><span class="dv">516</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Clay Springs&#39;</span></span>
-<span id="cb14-9"><a href="volume-plots.html#cb14-9" aria-hidden="true" tabindex="-1"></a>perc_FC4_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-10"><a href="volume-plots.html#cb14-10" aria-hidden="true" tabindex="-1"></a>perc_FC5_1_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-11"><a href="volume-plots.html#cb14-11" aria-hidden="true" tabindex="-1"></a>perc_FC5_2_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-12"><a href="volume-plots.html#cb14-12" aria-hidden="true" tabindex="-1"></a>perc_FC7_1_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-13"><a href="volume-plots.html#cb14-13" aria-hidden="true" tabindex="-1"></a>perc_FC7_2_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
-<span id="cb14-14"><a href="volume-plots.html#cb14-14" aria-hidden="true" tabindex="-1"></a>perc_SC2_t<span class="sc">$</span>Fire <span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span></code></pre></div>
+<div id="add-in-fire-name" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> Add in fire name<a href="volume-plots.html#add-in-fire-name" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="volume-plots.html#cb10-1" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Brian Head&#39;</span></span>
+<span id="cb10-2"><a href="volume-plots.html#cb10-2" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">120</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Dollar Ridge&#39;</span></span>
+<span id="cb10-3"><a href="volume-plots.html#cb10-3" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">121</span><span class="sc">:</span><span class="dv">372</span>),<span class="dv">4</span>]<span class="ot">=</span> <span class="st">&#39;Twitchell&#39;</span></span>
+<span id="cb10-4"><a href="volume-plots.html#cb10-4" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">373</span><span class="sc">:</span><span class="dv">408</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Pole Creek&#39;</span></span>
+<span id="cb10-5"><a href="volume-plots.html#cb10-5" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">409</span><span class="sc">:</span><span class="dv">480</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Seeley&#39;</span></span>
+<span id="cb10-6"><a href="volume-plots.html#cb10-6" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">481</span><span class="sc">:</span><span class="dv">504</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Shingle&#39;</span></span>
+<span id="cb10-7"><a href="volume-plots.html#cb10-7" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">505</span><span class="sc">:</span><span class="dv">564</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Trail Mountain&#39;</span></span>
+<span id="cb10-8"><a href="volume-plots.html#cb10-8" aria-hidden="true" tabindex="-1"></a>gross_sum_t_perc_t[<span class="fu">c</span>(<span class="dv">565</span><span class="sc">:</span><span class="dv">624</span>),<span class="dv">4</span>] <span class="ot">=</span> <span class="st">&#39;Clay Springs&#39;</span></span></code></pre></div>
 </div>
-<div id="plots" class="section level3 hasAnchor" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> plots<a href="volume-plots.html#plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?
-## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?
-## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?
-## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?
-## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?
-## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-# <code>{r, eval = T, echo = F} # gross_vol_all = ggplot(data = na.omit(gross_sum_t_perc_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() + geom_line() + ggtitle('Estimated Percent Volume over Time') + xlab('Time Since Debris Flow (Years)') + ylab('Percent Remaining Volume') + ylim(0,100) + scale_x_discrete(limit = c('EstInt','0', '1','2','3','4','5','6','7','8','9','10')) + theme_bw() + geom_line(data= na.omit(perc_FC5_1_t)) + geom_line(data= na.omit(perc_FC5_2_t)) + geom_line(data= na.omit(perc_FC7_t)) + geom_line(data = na.omit(perc_SC2_t)) +geom_line(data = na.omit(perc_FC4_t)) + geom_point(data = na.omit(perc_FC5_1_t)) + geom_point(data= na.omit(perc_FC5_2_t))  + geom_point(data= na.omit(perc_FC7_t)) + geom_point(data = na.omit(perc_SC2_t)) + geom_point(data = na.omit(perc_FC4_t)) # gross_vol_all #</code>
-Gross Volume All
-<img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div id="plots" class="section level3 hasAnchor" number="3.1.6">
+<h3><span class="header-section-number">3.1.6</span> plots<a href="volume-plots.html#plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+Gross Volume All</p>
 <pre><code>## Saving 7 x 5 in image</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <pre><code>## Saving 7 x 5 in image</code></pre>
 <p>Twitchell Fire</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Brian Head Fire</p>
 <pre><code>## Warning: Removed 16 rows containing missing values (geom_point).</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
-<pre><code>## Warning: Removed 16 rows containing missing values (geom_point).</code></pre>
-<p>Dollar Ridge Fire</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Dollar Ridge Fire
+<img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Pole Creek Fire</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Seeley Fire</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Shingle Fire
-<img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Clay Springs Fire
-<img src="_main_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Trail Mountain Fire
-<img src="_main_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
 </div>
-<div id="volume-compare-plots" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Volume Compare Plots<a href="volume-plots.html#volume-compare-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="volume-compare-plots" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Volume Compare Plots<a href="volume-plots.html#volume-compare-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <pre><code>##             Site obs_vol initial_vol_est obs_vol_low obs_vol_high X2020_reg
 ## 1    Brianhead 1      65            97.5      73.125      131.625  114.4951
 ## 2    Brianhead 2     500           625.0     468.750      843.750  283.9000
@@ -422,10 +345,8 @@ Gross Volume All
 ## 5       NA           NA
 ## 6       NA           NA</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: yintercept</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
-<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 
 </div>
 </div>
