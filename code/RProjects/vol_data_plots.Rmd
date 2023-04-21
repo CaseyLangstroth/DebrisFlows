@@ -2,7 +2,7 @@
 ### Read the CSV
 
 ```{r}
-gross_sum_tdf = read.csv('\\data_sheets\\processed_summary_data\\Gross_Summary_Vol_tdf.csv', header = T, na.strings = ' ')
+gross_sum_tdf = read.csv('Gross_Summary_Vol_tdf.csv', header = T, na.strings = ' ')
 head(gross_sum_tdf)
 ```
 ### Edit the column names and create new percent table object 

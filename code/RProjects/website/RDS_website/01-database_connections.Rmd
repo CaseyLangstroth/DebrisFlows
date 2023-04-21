@@ -3,19 +3,18 @@
 ```{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%', echo= FALSE}
 knitr::include_graphics("C:/Users/clang/Documents/USU/DF_Areas/debris_flow_stats/docs/_main_files/figure-html/database_structure.png") 
 ```
-# Code for designing and building my database structure in R
-```{r eval =FALSE, echo = TRUE}
-#### Building a database
-setwd('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\data_sheets')
+## Code for designing and building my database structure in R
+
 
 #### Connecting and building the db
-
+```{r, eval = TRUE}
 library(DBI)
 df_db = dbConnect(RSQLite::SQLite(), 'df_db')
-
+```
 ### Creating tables in db
-
+```{r, eval = FALSE, echo = TRUE}
 #DF ID table
+
 dbExecute(df_db, "create table df_ID (
           Site varchar(50) NOT NULL primary key,
           Fire varchar(50) NOT NULL,
@@ -120,16 +119,17 @@ dbExecute(df_db, "create table subcatchment_morphology(
           Bmh_Areakm2 double,
           Channel_Devlp char(1) check(Channel_Devlp in ('Y','N')),
           foreign key (DF_ID) references reach_morphology(DF_ID));")
+```
 ### Import csv to dbtables
-
+```{r, eval = FALSE, echo = TRUE}
 #first, read csvs
-sites = read.csv('Site_Locations.csv', header = T)
-df_volumes = read.csv('processed_summary_data//Gross_Summary_Vol_tdf.csv', header = T, na.strings = ' ')
-df_gsd = read.csv('processed_summary_data//df_gsd.csv', header = T, na.strings = ' ')
-df_morphology = read.csv('processed_summary_data//df_morphology.csv', header = T, na.strings = ' ')
-reach_morphology = read.csv('processed_summary_data//reach_morphology.csv', header = T, na.strings = ' ')
-channel_morphology = read.csv('processed_summary_data//channel_morphology.csv', header = T, na.strings = ' ')
-subcatch_morphology = read.csv('processed_summary_data//subcatchment_morphology.csv', header = T, na.strings = ' ')
+sites = read.csv('//data//data_sheets//Site_Locations.csv', header = T)
+df_volumes = read.csv('//data//data_sheets//processed_summary_data//Gross_Summary_Vol_tdf.csv', header = T, na.strings = ' ')
+df_gsd = read.csv('//data//data_sheets//processed_summary_data//df_gsd.csv', header = T, na.strings = ' ')
+df_morphology = read.csv('//data//data_sheets//processed_summary_data//df_morphology.csv', header = T, na.strings = ' ')
+reach_morphology = read.csv('//data//data_sheets//processed_summary_data//reach_morphology.csv', header = T, na.strings = ' ')
+channel_morphology = read.csv('//data//data_sheets//processed_summary_data//channel_morphology.csv', header = T, na.strings = ' ')
+subcatch_morphology = read.csv('//data//data_sheets//processed_summary_data//subcatchment_morphology.csv', header = T, na.strings = ' ')
 
 # import csv into tables (for completed tables)
 dbWriteTable(df_db, 'df_ID', sites, append  = TRUE)
