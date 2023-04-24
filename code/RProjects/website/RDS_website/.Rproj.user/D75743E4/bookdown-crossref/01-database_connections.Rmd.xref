@@ -1,4 +1,7 @@
 h1:database-structure Database Structure:
 fig:image database structure
-h1:code-for-designing-and-building-my-database-structure-in-r Code for designing and building my database structure in R
+h2:code-for-designing-and-building-my-database-structure-in-r Code for designing and building my database structure in R
+h4:connecting-and-building-the-db Connecting and building the db
+h3:creating-tables-in-db Creating tables in db
+h3:import-csv-to-dbtables Import csv to dbtables
 
