@@ -1,6 +1,7 @@
 *.docx
 *.png
 !docs/_main_files/figures-html/*.png
+!code/Rprojects/website/RDS_website/*.png
 *.jpg
 *.kmz
 *.tif
