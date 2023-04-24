@@ -1,6 +1,6 @@
 *.docx
 *.png
-!docs/**/*.png
+!docs/_main_files/figures-html/*.png
 *.jpg
 *.kmz
 *.tif
