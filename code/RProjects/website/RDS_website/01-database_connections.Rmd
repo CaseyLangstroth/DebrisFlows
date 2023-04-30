@@ -1,7 +1,8 @@
 # Database Structure:
 
-```{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%', echo= FALSE}
+```{r image, fig.cap = "database structure", fig.align = 'center', out.width = '100%', echo= TRUE}
 knitr::include_graphics("C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\code\\RProjects\\website\\RDS_website\\database_structure.png") 
+## leaving the echo as true because I still have no idea why the image isn't showing. it appears with knitting, but not on the website.
 ```
 ## Code for designing and building my database structure in R
 

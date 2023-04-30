@@ -110,26 +110,22 @@ twitchell_plot = ggplot(data = na.omit(twitchell_t), aes(Time, Volume, color =  
 ```{r, eval = TRUE, echo = FALSE}
 twitchell_plot
 ```
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = F, echo = FALSE}
 ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\twitchell_vol-tdf.png', plot = twitchell_plot, device = 'png')
 ```
 Brian Head Fire
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = T, echo = FALSE}
 gross_voltdf_bh = ggplot(data = (brian_head_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume') + geom_line(data = na.omit(brian_head_t)) +ggtitle('Brian Head Volume') + ylim(0,100) + scale_x_discrete(limits = c('EstInt','0', '1','2','3')) + theme_bw()
+gross_voltdf_bh
 ```
 
-```{r, eval = TRUE, echo = FALSE}
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\brianhead_vol-tdf.png', plot = gross_voltdf_bh, device = 'png')
-```
+
 Dollar Ridge Fire
 ```{r, eval = TRUE, echo = FALSE}
 gross_voltdf_dr = ggplot(data = na.omit(dollar_ridge_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume') +  geom_line() +ggtitle('Dollar Ridge Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3')) + theme_bw()
+gross_voltdf_dr
 ```
 
-
-```{r, echo = FALSE, eval = TRUE}
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\dollarridge_vol-tdf.png', plot = gross_voltdf_dr, device = 'png')
-```
 Pole Creek Fire
 ```{r, eval = T, echo = F}
 gross_voltdf_pc = ggplot(data = na.omit(pole_creek_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume')  +  geom_line() +ggtitle('Pole Creek Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3')) + theme_bw()
@@ -137,9 +133,7 @@ gross_voltdf_pc = ggplot(data = na.omit(pole_creek_t), aes(Time, Volume, color =
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_pc
 ```
-```{r, echo = FALSE, eval = TRUE}
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\polecreek_vol-tdf.png', plot = gross_voltdf_pc, device = 'png')
-```
+
 Seeley Fire
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_seeley = ggplot(data = na.omit(seeley_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume') +  geom_line() +ggtitle('Seeley Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3','4','5','6','7','8','9')) + theme_bw()
@@ -147,27 +141,28 @@ gross_voltdf_seeley = ggplot(data = na.omit(seeley_t), aes(Time, Volume, color =
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_seeley
 ```
-```{r, echo = FALSE, eval = TRUE}
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\seeley_vol-tdf.png', plot = gross_voltdf_seeley, device = 'png')
-```
+
 Shingle Fire
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_shingle = ggplot(data = na.omit(shingle_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume')  +  geom_line() +ggtitle('Shingle Volume')+ ylim(0,100)+ scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3','4','5','6','7','8')) + theme_bw()
 gross_voltdf_shingle
+```
+
+```{r, echo = F, eval = F}
 ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\shingle_vol-tdf.png', plot = gross_voltdf_shingle, device = 'png')
 ```
 Clay Springs Fire
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_cs = ggplot(data = na.omit(clay_springs_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume') +  geom_line() +ggtitle('Clay Springs Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3', '4', '5','6','7')) + theme_bw()
 gross_voltdf_cs
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\claysprings_vol-tdf.png', plot = gross_voltdf_cs, device = 'png')
 ```
+
 Trail Mountain Fire
 ```{r, echo = FALSE, eval = TRUE}
 gross_voltdf_tm = ggplot(data = na.omit(trail_mountain_t), aes(Time, Volume, color = Site, group = Site)) + geom_point() +  xlab('Years since Debris Flow') + ylab('Percent Remaining Volume') +  geom_line() +ggtitle('Trail Mountain Volume')+ ylim(0,100) + scale_x_discrete(limit = c('EstInt', '0', '1', '2', '3','4')) + theme_bw()
 gross_voltdf_tm
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\trailmountain_vol-tdf.png', plot = gross_voltdf_tm, device = 'png')
 ```
+
 ## Volume Compare Plots
 ```{r, eval = TRUE, echo = FALSE}
 vol_comp = read.csv('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\data_sheets\\processed_summary_data\\volume_comps.csv', header = T, na.strings = ' ')
@@ -196,12 +191,12 @@ group = c('Y','N')
 ```{r, eval = TRUE, echo = FALSE}
 vol_comp_plot = ggplot(data = vol_ratio, aes(obs_vol, X2020_reg, shape = Used)) + geom_point() + scale_color_manual(values = c('black','black')) + scale_shape_manual(values = c(1, 16)) + xlab('Observed Volume (m3)') + ylab('Modeled Volume (m3)')  + theme_bw() + labs(shape ='Sites used in this study')+ expand_limits(x=0,y=0)+ theme(legend.position = 'right') + geom_abline(yintercept = 0, color = 'black')
 vol_comp_plot
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\ObsMod2020.png', plot = vol_comp_plot, device = 'png')
 ```
+
+
 ```{r, eval = TRUE, echo = FALSE}
 vol_ratio_plot = ggplot(data = vol_ratio, aes(obs_vol, Ratio, shape = Used)) + geom_point() +  scale_color_manual(values = c('black','black')) + scale_shape_manual(values = c(1, 16)) + xlab('Observed Volume (m3)') + ylab('Modeled Volume:Observed Volume')  + theme_bw() + labs(shape ='Sites used in this study')+ expand_limits(x=0,y=0)+ theme(legend.position = 'right') + geom_hline(yintercept = 1, color = 'black') + geom_hline(yintercept = 1.5, linetype = 'dashed', color = 'black') + geom_hline(yintercept = 0.5, linetype = 'dashed', color = 'black')
 vol_ratio_plot
-ggsave('C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\figures\\plots\\ObsRatio2020.png', plot = vol_ratio_plot, device = 'png')
 ```
 
 ```{r, eval = TRUE, echo = FALSE}

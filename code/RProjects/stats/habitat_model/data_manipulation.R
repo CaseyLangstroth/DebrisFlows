@@ -7,31 +7,73 @@ library(dplyr)
 library(lubridate)
 library(data.table)
 
-#### DATA MANIPULATION HYDRO ACOUSTICS (VEGETATION AND SUBSTRATE DATA)----
-# create a sites column
+#### DATA MANIPULATION 
+###--------------VOLUME PERCENTAGES----
 
-hydro_sites <- hydro_sites %>% 
-  mutate(site = case_when(
-           FileName == "tui20220717_083114.dt4" | FileName == "tui20220717_075829.dt4" | FileName == "tui20220717_072715.dt4" | 
-                        FileName == "tui20220717_065930.dt4" | FileName == "tui20220717_063500.dt4" | FileName == "tui20220717_061459.dt4" ~ "DAG",
-           FileName == "tui20220624_095932.dt4" | FileName == "tui20220624_095451.dt4" | FileName == "tui20220624_094957.dt4" | 
-            FileName == "tui20220624_094600.dt4" ~ "BLH",
-           FileName == "tui20220624_124142.dt4" | FileName == "tui20220624_123027.dt4" | FileName == "tui20220717_113455.dt4" ~ "TAM",
-           FileName == "tui20220803_124239.dt4" | FileName == "tui20220803_122606.dt4" | FileName == "tui20220803_121500.dt4" | 
-             FileName == "tui20220803_115729.dt4" ~ "PEP",
-           FileName == "tui20220804_073333.dt4" | FileName == "tui20220804_071752.dt4" | FileName == "tui20220804_070146.dt4" ~ "PLQ",
-           FileName == "tui20220806_123427.dt4" | FileName == "tui20220806_130447.dt4"| FileName == "tui20220806_134638.dt4" ~ "NTS",
-           FileName == "tui20220807_094332.dt4" | FileName == "tui20220807_102131.dt4"| FileName == "tui20220807_105132.dt4" ~ "HEK",
-           FileName == "tui20220807_132307.dt4"| FileName == "tui20220807_134553.dt4"| FileName == "tui20220807_135425.dt4" | 
-             FileName == "tui20220807_140245.dt4" ~ "ABY",
-           FileName == "tui20220807_171423.dt4" | FileName == "tui20220807_172421.dt4"| FileName == "tui20220807_173323.dt4" ~ "PYR"))
+# read the csv
+datafolder = 'C:\\Users\\clang\\Documents\\USU\\DF_Areas\\debris_flow_stats\\data\\data_sheets\\'
+setwd(datafolder)
+gross_sum_tdf = read.csv('processed_summary_data\\Gross_Summary_Vol_tdf.csv', header = T, na.strings = ' ')
 
-# check to make sure it worked
-levels(as.factor(hydro_sites$site))
+head(gross_sum_tdf)
 
-# check plant and bottom type validity
-levels(as.factor(hydro_sites$PlantStatus))
-levels(as.factor(hydro_sites$BottomTypeStatus))
+#edit column names to strings
+colnames(gross_sum_tdf) = c('Site','EstInt', '0', '1','2','3','4','5','6','7','8','9','10')
+
+#make new percent dataframe
+gross_sum_t_perc = gross_sum_tdf
+
+#change Estimated Initial Column to 100%
+gross_sum_t_perc %>%
+  mutate(EstInt = 100)
+
+# get percent change using for loop
+l1 = list(3:13) # 13 columns, starting at column 3
+for (i in l1){
+  gross_sum_t_perc[,i] = round((gross_sum_tdf[,i]/gross_sum_tdf[,2]*100),1)
+}
+
+head(gross_sum_t_perc)
+
+#Subset fires to their own datasets
+brian_head = gross_sum_t_perc %>%
+  filter(grepl("Brian Head", Site))
+dollar_ridge =   gross_sum_t_perc %>%
+  filter(grepl("Dollar Ridge", Site))
+pole_creek =   gross_sum_t_perc %>%
+  filter(grepl("Lake Fork|POCR", Site))
+twitchell = gross_sum_t_perc %>%
+  filter(grepl('Twitchell|Fish Creek|Shingle Creek', Site))
+seeley=   gross_sum_t_perc %>%
+  filter(grepl("Seeley", Site))
+shingle=  gross_sum_t_perc %>%
+  filter(grepl("Shingle", Site))
+trail_mountain =   gross_sum_t_perc %>%
+  filter(grepl("Trail Mountain", Site))
+clay_springs =   gross_sum_t_perc %>%
+  filter(grepl("Clay Springs", Site))
+
+
+# pivot longer (for plots)
+brian_head_t = brian_head %>% pivot_longer(cols = EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+dollar_ridge_t = dollar_ridge %>%pivot_longer(cols = EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+twitchell_t = twitchell %>% pivot_longer(cols = EstInt:'10', names_to = 'Time', values_to = 'Volume')
+pole_creek_t = pole_creek %>% pivot_longer(cols = EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+seeley_t = seeley %>% pivot_longer(cols = EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+shingle_t = shingle %>% pivot_longer(cols = EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+clay_springs_t = clay_springs %>% pivot_longer(cols =  EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+trail_mountain_t = trail_mountain %>% pivot_longer(cols =  EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+gross_sum_t_perc_t = gross_sum_t_perc %>% pivot_longer(cols =  EstInt:'10' , names_to = 'Time', values_to = 'Volume')
+gross_sum_t_perc_t$Fire = NA
+
+gross_sum_t_perc_t[c(1:24),4] = 'Brian Head'
+gross_sum_t_perc_t[c(25:120),4] = 'Dollar Ridge'
+gross_sum_t_perc_t[c(121:372),4]= 'Twitchell'
+gross_sum_t_perc_t[c(373:408),4] = 'Pole Creek'
+gross_sum_t_perc_t[c(409:480),4] = 'Seeley'
+gross_sum_t_perc_t[c(481:504),4] = 'Shingle'
+gross_sum_t_perc_t[c(505:564),4] = 'Trail Mountain'
+gross_sum_t_perc_t[c(565:624),4] = 'Clay Springs'
 
 # subset to just 5-30 m
 hydro_sites <- hydro_sites %>%
